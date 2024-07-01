@@ -3,7 +3,9 @@ param (
  )
 
 $tempFolderPath = Join-Path -Path $PSScriptRoot -ChildPath "temp"
-Remove-Item -Path $tempFolderPath -Recurse -Force
+if (Test-Path $tempFolderPath) {
+    Remove-Item -Path $tempFolderPath -Recurse -Force
+}
 New-Item -Path $PSScriptRoot -Name "temp" -ItemType "directory"
 Expand-Archive -Path $elvuiZipPath -DestinationPath $tempFolderPath -Force
 
